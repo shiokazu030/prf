@@ -99,3 +99,28 @@ git push -u origin main
 ```
 
 `YOUR_NAME` と `YOUR_REPOSITORY` は、自分のGitHubユーザー名と作成したリポジトリ名に置き換えてください。
+
+## Cloudflare Pagesで公開する設定
+
+このアプリは静的サイトとして出力できます。Cloudflare Pagesでは以下にしてください。
+
+```text
+Framework preset: Next.js
+Build command: npm run build
+Build output directory: out
+Root directory: /
+```
+
+Cloudflare側で `npx opennextjs-cloudflare build` が使われている場合は、このMVPでは不要です。
+Pagesのビルド設定を `npm run build` と `out` に変更してください。
+
+## Cloudflare Workersで公開する場合
+
+Cloudflareの画面で `Deploy command: npx wrangler deploy` と表示されている場合はWorkersです。
+このリポジトリには `wrangler.jsonc` を入れているため、以下の設定で公開できます。
+
+```text
+Build command: npm run build
+Deploy command: npx wrangler deploy
+Root directory: /
+```
