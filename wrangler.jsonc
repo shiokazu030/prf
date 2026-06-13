@@ -4,6 +4,8 @@
   "compatibility_date": "2026-06-14",
   "assets": {
     "directory": "./out",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
   }
 }

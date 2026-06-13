@@ -19,26 +19,11 @@ type StoredState = {
   profile: ProfileData;
 };
 
-function readInitialTemplateId() {
-  if (typeof window === "undefined") return null;
-  const params = new URLSearchParams(window.location.search);
-  const templateId = params.get("template");
-  if (!templateId) return null;
-  return templates.some((template) => template.id === templateId) ? templateId : null;
-}
-
-function readInitialCategory(): TemplateCategory | "all" {
-  if (typeof window === "undefined") return "all";
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get("category");
-  return category === "song" || category === "member" ? category : "all";
-}
-
 export default function CreatePage() {
   const previewRef = useRef<HTMLDivElement>(null);
   const previewFrameRef = useRef<HTMLDivElement>(null);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(() => readInitialTemplateId());
-  const [activeCategory, setActiveCategory] = useState<TemplateCategory | "all">(() => readInitialCategory());
+  const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<TemplateCategory | "all">("all");
   const [profile, setProfile] = useState<ProfileData>(defaultProfileData);
   const [saving, setSaving] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -49,8 +34,13 @@ export default function CreatePage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const templateId = params.get("template");
+    const category = params.get("category");
     const resetTemplate = params.get("resetTemplate") === "1";
     const storedRaw = window.localStorage.getItem(STORAGE_KEY);
+
+    if (category === "song" || category === "member") {
+      setActiveCategory(category);
+    }
 
     if (storedRaw) {
       try {
