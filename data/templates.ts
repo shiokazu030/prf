@@ -83,15 +83,16 @@ export const templates: ProfileTemplate[] = [
   {
     id: "pale-fragile",
     category: "song",
-    title: "儚い淡色",
-    description: "くすみカラーと透明感で、静かに余韻が残る雰囲気。",
-    palette: ["#f7f3f2", "#c9d7d2", "#ded4e8", "#ffffff"],
-    decorations: ["drop", "sparkle", "flower"],
-    mood: "透明感",
-    backgroundStyle: "linear-gradient(135deg, #f7f3f2 0%, #dfeae7 48%, #eee5f5 100%)",
-    frameStyle: "#b8c9c4",
-    accentStyle: "#8f86ab",
-    textColor: "#4a4b57"
+    title: "絶対アイドル辞めないでイメージ",
+    description: "淡ピンクチェックと水色リボンで、永遠のアイドル感を閉じ込めたテンプレ。",
+    palette: ["#fff7fb", "#8bc9f5", "#f6d7ea", "#ffffff"],
+    decorations: ["ribbon", "sparkle", "lace", "heart"],
+    mood: "永遠アイドル",
+    backgroundStyle:
+      "linear-gradient(135deg, #fff7fb 0%, #f6d7ea 38%, #dff3ff 72%, #ffffff 100%), repeating-linear-gradient(90deg, rgba(139,201,245,0.16) 0 6px, transparent 6px 70px), repeating-linear-gradient(0deg, rgba(230,143,188,0.13) 0 6px, transparent 6px 62px)",
+    frameStyle: "#8bc9f5",
+    accentStyle: "#e68fbc",
+    textColor: "#4d3b50"
   },
   {
     id: "happy-pop",

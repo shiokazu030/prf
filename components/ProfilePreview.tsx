@@ -157,9 +157,27 @@ function Decoration({ colors, templateId }: { colors: PreviewColors; templateId:
   const isDarkAddiction = templateId === "dark-addiction";
   const isSweetRomance = templateId === "sweet-romance";
   const isLoveSong = templateId === "happy-pop";
+  const isForeverIdol = templateId === "pale-fragile";
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {isForeverIdol ? (
+        <>
+          <div
+            className="absolute inset-[58px] rounded-[36px] opacity-40"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(90deg, transparent 0 66px, rgba(139,201,245,0.42) 66px 72px, transparent 72px 132px), repeating-linear-gradient(0deg, transparent 0 58px, rgba(230,143,188,0.35) 58px 64px, transparent 64px 118px)"
+            }}
+          />
+          <div className="absolute left-[162px] top-[80px] h-[34px] w-[112px] rotate-[-18deg] rounded-full opacity-85" style={{ backgroundColor: colors.line }} />
+          <div className="absolute left-[228px] top-[80px] h-[34px] w-[112px] rotate-[18deg] rounded-full opacity-85" style={{ backgroundColor: colors.line }} />
+          <div className="absolute right-[162px] top-[80px] h-[34px] w-[112px] rotate-[18deg] rounded-full opacity-85" style={{ backgroundColor: colors.line }} />
+          <div className="absolute right-[228px] top-[80px] h-[34px] w-[112px] rotate-[-18deg] rounded-full opacity-85" style={{ backgroundColor: colors.line }} />
+          <div className="absolute left-[310px] bottom-[82px] text-[62px] font-black opacity-80" style={{ color: colors.accent }}>✧</div>
+          <div className="absolute right-[310px] top-[92px] text-[58px] font-black opacity-80" style={{ color: colors.accent }}>✧</div>
+        </>
+      ) : null}
       {isLoveSong ? (
         <>
           <div
@@ -261,6 +279,7 @@ export const ProfilePreview = forwardRef<
   const isDarkAddiction = template.id === "dark-addiction";
   const isSweetRomance = template.id === "sweet-romance";
   const isLoveSong = template.id === "happy-pop";
+  const isForeverIdol = template.id === "pale-fragile";
   const colors: PreviewColors = {
     accent: isRoyalCute ? "#e85f94" : template.accentStyle,
     frame: isRoyalCute ? "#f4b8cf" : template.frameStyle,
@@ -272,6 +291,8 @@ export const ProfilePreview = forwardRef<
           ? "#e60033"
           : isLoveSong
             ? "#596646"
+            : isForeverIdol
+              ? "#8bc9f5"
             : template.palette[1],
     lineSoft: isRoyalCute
       ? "rgba(240,169,197,0.32)"
@@ -281,6 +302,8 @@ export const ProfilePreview = forwardRef<
           ? "rgba(230,0,51,0.18)"
           : isLoveSong
             ? "rgba(178,58,46,0.18)"
+            : isForeverIdol
+              ? "rgba(139,201,245,0.24)"
           : `${template.palette[1]}55`,
     pale: isRoyalCute ? "#ffe3ed" : template.palette[2],
     text: isRoyalCute ? "#56384a" : template.textColor
@@ -311,6 +334,8 @@ export const ProfilePreview = forwardRef<
                 ? "rgba(255, 250, 252, 0.9)"
                 : isLoveSong
                   ? "rgba(255, 250, 243, 0.9)"
+                  : isForeverIdol
+                    ? "rgba(255, 250, 254, 0.9)"
                   : "#fffafd"
           }}
         >
