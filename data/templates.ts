@@ -70,15 +70,16 @@ export const templates: ProfileTemplate[] = [
   {
     id: "sparkle-idol",
     category: "song",
-    title: "きらきらアイドル",
-    description: "パステル、星、ラメ風。ステージライトみたいな高揚感。",
-    palette: ["#f8fbff", "#98d9ff", "#ffe58f", "#ffb3e5"],
-    decorations: ["star", "sparkle", "dot"],
-    mood: "ステージ",
-    backgroundStyle: "linear-gradient(135deg, #f7fcff 0%, #dff3ff 42%, #fff4c8 100%)",
-    frameStyle: "#77bff2",
-    accentStyle: "#f0b429",
-    textColor: "#33425f"
+    title: "闇落ちうさぎイメージ",
+    description: "くすみネイビーとグレー、うさ耳フードとステッチ感のあるダークかわいいテンプレ。",
+    palette: ["#101723", "#5f6f91", "#d9e0ef", "#1f2937"],
+    decorations: ["moon", "star", "sparkle", "lace"],
+    mood: "ダークうさぎ",
+    backgroundStyle:
+      "radial-gradient(circle at 22% 16%, rgba(53,211,181,0.32) 0 4%, transparent 16%), linear-gradient(135deg, #080b12 0%, #182235 46%, #31415f 100%)",
+    frameStyle: "#5f6f91",
+    accentStyle: "#4f8fcf",
+    textColor: "#f4f7ff"
   },
   {
     id: "pale-fragile",

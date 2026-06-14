@@ -158,9 +158,31 @@ function Decoration({ colors, templateId }: { colors: PreviewColors; templateId:
   const isSweetRomance = templateId === "sweet-romance";
   const isLoveSong = templateId === "happy-pop";
   const isForeverIdol = templateId === "pale-fragile";
+  const isDarkRabbit = templateId === "sparkle-idol";
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {isDarkRabbit ? (
+        <>
+          <div className="absolute inset-0 opacity-70" style={{ background: "radial-gradient(circle at 74% 18%, rgba(42, 224, 196, 0.28), transparent 12%), radial-gradient(circle at 18% 84%, rgba(79, 143, 207, 0.28), transparent 16%)" }} />
+          <div className="absolute left-[130px] top-[62px] h-[148px] w-[48px] rotate-[-20deg] rounded-full bg-[#6b7895] opacity-85" />
+          <div className="absolute left-[188px] top-[62px] h-[148px] w-[48px] rotate-[20deg] rounded-full bg-[#6b7895] opacity-85" />
+          <div className="absolute right-[130px] top-[62px] h-[148px] w-[48px] rotate-[20deg] rounded-full bg-[#6b7895] opacity-85" />
+          <div className="absolute right-[188px] top-[62px] h-[148px] w-[48px] rotate-[-20deg] rounded-full bg-[#6b7895] opacity-85" />
+          <div className="absolute left-[143px] top-[94px] h-[92px] w-[20px] rotate-[-20deg] rounded-full bg-[#d9e0ef] opacity-75" />
+          <div className="absolute right-[143px] top-[94px] h-[92px] w-[20px] rotate-[20deg] rounded-full bg-[#d9e0ef] opacity-75" />
+          {Array.from({ length: 14 }).map((_, index) => (
+            <span
+              key={`stitch-${index}`}
+              className="absolute h-[4px] w-[38px] rotate-[-28deg] rounded-full bg-white opacity-65"
+              style={{
+                left: `${12 + ((index * 13) % 76)}%`,
+                top: `${16 + ((index * 17) % 68)}%`
+              }}
+            />
+          ))}
+        </>
+      ) : null}
       {isForeverIdol ? (
         <>
           <div
@@ -280,6 +302,7 @@ export const ProfilePreview = forwardRef<
   const isSweetRomance = template.id === "sweet-romance";
   const isLoveSong = template.id === "happy-pop";
   const isForeverIdol = template.id === "pale-fragile";
+  const isDarkRabbit = template.id === "sparkle-idol";
   const colors: PreviewColors = {
     accent: isRoyalCute ? "#e85f94" : template.accentStyle,
     frame: isRoyalCute ? "#f4b8cf" : template.frameStyle,
@@ -293,6 +316,8 @@ export const ProfilePreview = forwardRef<
             ? "#596646"
             : isForeverIdol
               ? "#8bc9f5"
+              : isDarkRabbit
+                ? "#5f6f91"
             : template.palette[1],
     lineSoft: isRoyalCute
       ? "rgba(240,169,197,0.32)"
@@ -304,6 +329,8 @@ export const ProfilePreview = forwardRef<
             ? "rgba(178,58,46,0.18)"
             : isForeverIdol
               ? "rgba(139,201,245,0.24)"
+              : isDarkRabbit
+                ? "rgba(95,111,145,0.26)"
           : `${template.palette[1]}55`,
     pale: isRoyalCute ? "#ffe3ed" : template.palette[2],
     text: isRoyalCute ? "#56384a" : template.textColor
@@ -336,6 +363,8 @@ export const ProfilePreview = forwardRef<
                   ? "rgba(255, 250, 243, 0.9)"
                   : isForeverIdol
                     ? "rgba(255, 250, 254, 0.9)"
+                    : isDarkRabbit
+                      ? "rgba(244, 247, 255, 0.9)"
                   : "#fffafd"
           }}
         >
