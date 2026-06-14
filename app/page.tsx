@@ -7,6 +7,14 @@ export default function Home() {
   const samples = ["sweet-romance", "dark-addiction", "member-purple"].map(
     (id) => templates.find((template) => template.id === id) ?? templates[0]
   );
+  const requestText = [
+    "@yG5PlAbN9t8069",
+    "追加してほしい楽曲テンプレ：",
+    "直してほしいところ：",
+    "",
+    "こんな機能ほしいかも："
+  ].join("\n");
+  const requestUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(requestText)}`;
 
   return (
     <main className="min-h-screen">
@@ -91,6 +99,27 @@ export default function Home() {
               <TemplateMiniPreview template={template} />
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-4 pb-12 pt-4">
+        <div className="rounded-lg border border-[#f5cfdf] bg-white/[0.88] p-5 text-center shadow-soft">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-lg bg-[#ffe0ec] text-[#d85f91]">
+            <Sparkles size={24} />
+          </div>
+          <h2 className="text-xl font-black text-[#3f3342]">追加してほしい楽曲テンプレ募集中🫶</h2>
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-7 text-[#665866]">
+            欲しい曲や直してほしいところがあれば、Xで教えてください。
+          </p>
+          <a
+            href={requestUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg bg-[#3f3342] px-6 py-4 text-base font-black text-white shadow-soft transition hover:brightness-110"
+          >
+            Xでリクエストする
+            <ArrowRight size={20} />
+          </a>
         </div>
       </section>
     </main>
