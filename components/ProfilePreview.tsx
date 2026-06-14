@@ -156,9 +156,27 @@ function PhotoBox({ image, imageY, colors }: { image?: string; imageY?: string; 
 function Decoration({ colors, templateId }: { colors: PreviewColors; templateId: string }) {
   const isDarkAddiction = templateId === "dark-addiction";
   const isSweetRomance = templateId === "sweet-romance";
+  const isLoveSong = templateId === "happy-pop";
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {isLoveSong ? (
+        <>
+          <div
+            className="absolute inset-[52px] rounded-[36px] opacity-45"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(90deg, transparent 0 74px, rgba(89,102,70,0.42) 74px 82px, transparent 82px 142px), repeating-linear-gradient(0deg, transparent 0 60px, rgba(178,58,46,0.32) 60px 66px, transparent 66px 118px)"
+            }}
+          />
+          <div className="absolute left-[150px] top-[78px] h-[94px] w-[132px] rotate-[-12deg] rounded-[70%_70%_40%_40%] bg-[#d8b37a] opacity-85" />
+          <div className="absolute right-[150px] top-[78px] h-[94px] w-[132px] rotate-[12deg] rounded-[70%_70%_40%_40%] bg-[#d8b37a] opacity-85" />
+          <div className="absolute left-[192px] top-[112px] h-[48px] w-[70px] rotate-[-12deg] rounded-[70%_70%_40%_40%] bg-[#fff8ef] opacity-85" />
+          <div className="absolute right-[192px] top-[112px] h-[48px] w-[70px] rotate-[12deg] rounded-[70%_70%_40%_40%] bg-[#fff8ef] opacity-85" />
+          <div className="absolute left-[308px] top-[96px] text-[58px] font-black opacity-80" style={{ color: colors.accent }}>♪</div>
+          <div className="absolute right-[308px] bottom-[84px] text-[64px] font-black opacity-80" style={{ color: colors.accent }}>♬</div>
+        </>
+      ) : null}
       <div className="absolute left-[44px] top-[40px] text-[54px] font-black" style={{ color: colors.line }}>♡</div>
       <div className="absolute right-[70px] top-[54px] text-[46px] font-black" style={{ color: colors.line }}>✦</div>
       <div className="absolute left-[72px] bottom-[56px] text-[42px] font-black" style={{ color: colors.line }}>✧</div>
@@ -242,16 +260,27 @@ export const ProfilePreview = forwardRef<
   const isRoyalCute = template.id === "royal-cute";
   const isDarkAddiction = template.id === "dark-addiction";
   const isSweetRomance = template.id === "sweet-romance";
+  const isLoveSong = template.id === "happy-pop";
   const colors: PreviewColors = {
     accent: isRoyalCute ? "#e85f94" : template.accentStyle,
     frame: isRoyalCute ? "#f4b8cf" : template.frameStyle,
-    line: isRoyalCute ? "#f0a9c5" : isDarkAddiction ? "#a5163d" : isSweetRomance ? "#e60033" : template.palette[1],
+    line: isRoyalCute
+      ? "#f0a9c5"
+      : isDarkAddiction
+        ? "#a5163d"
+        : isSweetRomance
+          ? "#e60033"
+          : isLoveSong
+            ? "#596646"
+            : template.palette[1],
     lineSoft: isRoyalCute
       ? "rgba(240,169,197,0.32)"
       : isDarkAddiction
         ? "rgba(165,22,61,0.22)"
         : isSweetRomance
           ? "rgba(230,0,51,0.18)"
+          : isLoveSong
+            ? "rgba(178,58,46,0.18)"
           : `${template.palette[1]}55`,
     pale: isRoyalCute ? "#ffe3ed" : template.palette[2],
     text: isRoyalCute ? "#56384a" : template.textColor
@@ -276,7 +305,13 @@ export const ProfilePreview = forwardRef<
           className="flex h-full flex-col rounded-[34px] border-[4px] border-dashed px-[34px] pb-[24px] pt-[18px]"
           style={{
             borderColor: colors.frame,
-            backgroundColor: isDarkAddiction ? "rgba(247, 252, 255, 0.88)" : isSweetRomance ? "rgba(255, 250, 252, 0.9)" : "#fffafd"
+            backgroundColor: isDarkAddiction
+              ? "rgba(247, 252, 255, 0.88)"
+              : isSweetRomance
+                ? "rgba(255, 250, 252, 0.9)"
+                : isLoveSong
+                  ? "rgba(255, 250, 243, 0.9)"
+                  : "#fffafd"
           }}
         >
           <header className="mb-3 shrink-0 text-center">

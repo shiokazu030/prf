@@ -96,15 +96,16 @@ export const templates: ProfileTemplate[] = [
   {
     id: "happy-pop",
     category: "song",
-    title: "元気ポップ",
-    description: "明るい色と丸い図形で、弾むような元気さ。",
-    palette: ["#fff7d6", "#ff8a4c", "#55c7a6", "#69a7ff"],
-    decorations: ["star", "dot", "heart"],
-    mood: "はじける",
-    backgroundStyle: "linear-gradient(135deg, #fff7d6 0%, #ffe0a1 45%, #d8f7ee 100%)",
-    frameStyle: "#ff8a4c",
-    accentStyle: "#1aa984",
-    textColor: "#4b3b2f"
+    title: "ラブソングに襲われるイメージ",
+    description: "ブラウンチェック、カーキ、赤リボン。恋に追いかけられるようなテンプレ。",
+    palette: ["#fff8ef", "#b23a2e", "#e9c58f", "#596646"],
+    decorations: ["heart", "ribbon", "dot", "star"],
+    mood: "恋の大騒ぎ",
+    backgroundStyle:
+      "linear-gradient(135deg, #fff8ef 0%, #f1ddbd 44%, #fff6ec 100%), repeating-linear-gradient(90deg, rgba(89,102,70,0.14) 0 8px, transparent 8px 78px), repeating-linear-gradient(0deg, rgba(178,58,46,0.12) 0 6px, transparent 6px 62px)",
+    frameStyle: "#596646",
+    accentStyle: "#b23a2e",
+    textColor: "#463629"
   },
   {
     id: "member-pink",
