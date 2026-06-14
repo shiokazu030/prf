@@ -76,7 +76,7 @@ function NoteBox({
         {label}
       </div>
       <div
-        className={`preview-safe-text flex-1 overflow-hidden whitespace-pre-wrap rounded-[15px] bg-[linear-gradient(#fff_0,#fff_26px,#ffe1ec_27px)] px-4 py-1.5 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text flex-1 overflow-hidden whitespace-pre-wrap rounded-[15px] bg-white px-4 py-1.5 font-bold text-[#56384a] shadow-[inset_0_-3px_0_rgba(240,169,197,0.32)] ${hasValue ? "" : "text-[#caa7b8]"}`}
         style={{
           display: "-webkit-box",
           fontSize: noteFontSize(value),
