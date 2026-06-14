@@ -4,7 +4,7 @@ import { templates } from "@/data/templates";
 import { TemplateMiniPreview } from "@/components/TemplateMiniPreview";
 
 export default function Home() {
-  const samples = ["royal-cute", "sparkle-idol", "member-sky"].map(
+  const samples = ["royal-cute", "member-pink", "member-purple"].map(
     (id) => templates.find((template) => template.id === id) ?? templates[0]
   );
 
@@ -21,23 +21,23 @@ export default function Home() {
               推しプロフメーカー
             </h1>
             <p className="mt-4 max-w-xl text-base leading-8 text-[#665866]">
-              楽曲の雰囲気やメンバーカラーで作れる、Twitter / X 投稿向けのプロフィール帳メーカーです。
-              テンプレを選んで入力するだけで、1200×1200pxのPNG画像を保存できます。
+              プロフ画像と推し情報を入れて、Twitter / X に投稿しやすい横長プロフィール帳を作れます。
+              王道かわいいテンプレと、10色のメンバーカラーテンプレに対応しています。
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/create?template=royal-cute"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg bg-[#3f3342] px-6 py-4 text-base font-black text-white shadow-soft transition hover:brightness-110"
               >
-                作ってみる
+                まず作ってみる
                 <ArrowRight size={20} />
               </Link>
-              <a
-                href="#categories"
+              <Link
+                href="/create?category=member"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg border-2 border-[#e8cfdf] bg-white/[0.82] px-6 py-4 text-base font-black text-[#3f3342] shadow-sm transition hover:bg-white"
               >
-                テンプレを見る
-              </a>
+                色を選ぶ
+              </Link>
             </div>
           </div>
 
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <h2 className="text-xl font-black text-[#3f3342]">楽曲イメージ</h2>
             <p className="mt-2 text-sm leading-7 text-[#665866]">
-              王道かわいい、甘め恋愛、ダーク中毒など、曲の世界観を抽象化したテンプレから選べます。
+              まずは王道かわいいをベースに、推し画像入りの横長プロフィール帳を作れます。
             </p>
           </Link>
           <Link
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
             <h2 className="text-xl font-black text-[#3f3342]">メンバーカラー</h2>
             <p className="mt-2 text-sm leading-7 text-[#665866]">
-              ピンク、水色、オレンジ、緑、青、黄色、赤、白、薄紫。色ごとに装飾も変わります。
+              ピンク、水色、オレンジ、緑、青、黄色、赤、白、薄紫、紫の10色から選べます。
             </p>
           </Link>
         </div>
