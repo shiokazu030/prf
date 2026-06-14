@@ -26,7 +26,7 @@ export default function Home() {
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/create"
+                href="/create?template=royal-cute"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg bg-[#3f3342] px-6 py-4 text-base font-black text-white shadow-soft transition hover:brightness-110"
               >
                 作ってみる
