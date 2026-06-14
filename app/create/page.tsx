@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { toPng } from "html-to-image";
+import { toBlob } from "html-to-image";
 import { ArrowLeft, Copy, RefreshCcw } from "lucide-react";
 import { ProfileForm } from "@/components/ProfileForm";
 import { ProfilePreview } from "@/components/ProfilePreview";
@@ -18,6 +18,36 @@ type StoredState = {
   templateId: string;
   profile: ProfileData;
 };
+
+async function waitForPreviewImages(element: HTMLElement) {
+  const images = Array.from(element.querySelectorAll("img"));
+  await Promise.all(
+    images.map(async (image) => {
+      if (image.complete && image.naturalWidth > 0) return;
+      if ("decode" in image) {
+        try {
+          await image.decode();
+          return;
+        } catch {
+          // Fall back to load/error listeners below.
+        }
+      }
+      await new Promise<void>((resolve) => {
+        image.addEventListener("load", () => resolve(), { once: true });
+        image.addEventListener("error", () => resolve(), { once: true });
+      });
+    })
+  );
+}
+
+function downloadBlob(blob: Blob, fileName: string) {
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.download = fileName;
+  link.href = url;
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 
 export default function CreatePage() {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -97,7 +127,8 @@ export default function CreatePage() {
 
     setSaving(true);
     try {
-      const dataUrl = await toPng(previewRef.current, {
+      await waitForPreviewImages(previewRef.current);
+      const blob = await toBlob(previewRef.current, {
         cacheBust: true,
         pixelRatio: 2,
         width: 1600,
@@ -107,10 +138,26 @@ export default function CreatePage() {
           height: "900px"
         }
       });
-      const link = document.createElement("a");
-      link.download = `oshi-profile-${selectedTemplate.id}.png`;
-      link.href = dataUrl;
-      link.click();
+      if (!blob) return;
+
+      const fileName = `oshi-profile-${selectedTemplate.id}.png`;
+      const file = new File([blob], fileName, { type: "image/png" });
+      const shareData = {
+        files: [file],
+        title: "推しプロフィール帳",
+        text: "プロフィール帳作ってみました♡"
+      };
+
+      if (navigator.canShare?.(shareData)) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (error) {
+          if (error instanceof DOMException && error.name === "AbortError") return;
+        }
+      }
+
+      downloadBlob(blob, fileName);
     } finally {
       setSaving(false);
     }
