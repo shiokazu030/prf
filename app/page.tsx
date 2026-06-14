@@ -29,14 +29,14 @@ export default function Home() {
                 href="/create"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg bg-[#3f3342] px-6 py-4 text-base font-black text-white shadow-soft transition hover:brightness-110"
               >
-                テンプレを選ぶ
+                プロフを作る
                 <ArrowRight size={20} />
               </Link>
               <Link
                 href="/create?category=member"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg border-2 border-[#e8cfdf] bg-white/[0.82] px-6 py-4 text-base font-black text-[#3f3342] shadow-sm transition hover:bg-white"
               >
-                色テンプレを見る
+                テンプレを見る
               </Link>
             </div>
           </div>

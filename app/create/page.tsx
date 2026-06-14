@@ -128,6 +128,27 @@ export default function CreatePage() {
   const selectedTemplate = useMemo(() => getTemplateById(selectedTemplateId), [selectedTemplateId]);
   const previewScale = Math.min(previewFrameWidth / 1600, 1);
 
+  const changeTemplate = () => {
+    setSelectedTemplateId(null);
+    setInvalidTemplate(false);
+    setActiveCategory("all");
+    try {
+      const storedRaw = window.localStorage.getItem(STORAGE_KEY);
+      const stored = storedRaw ? (JSON.parse(storedRaw) as Partial<StoredState>) : {};
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          ...stored,
+          templateId: "",
+          profile
+        })
+      );
+    } catch {
+      // It is fine if localStorage is unavailable.
+    }
+    window.history.pushState(null, "", "/create");
+  };
+
   const savePng = async () => {
     if (!previewRef.current || !selectedTemplate) return;
 
@@ -209,13 +230,14 @@ export default function CreatePage() {
           <ArrowLeft size={18} />
           トップへ
         </Link>
-        <Link
-          href="/create?resetTemplate=1"
+        <button
+          type="button"
+          onClick={changeTemplate}
           className="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-bold text-[#4b3342] shadow-sm"
         >
           <RefreshCcw size={16} />
           テンプレ変更
-        </Link>
+        </button>
       </div>
 
       <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(390px,0.8fr)] lg:items-start">
