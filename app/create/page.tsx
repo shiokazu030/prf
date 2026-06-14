@@ -8,6 +8,7 @@ import { ProfileForm } from "@/components/ProfileForm";
 import { ProfilePreview } from "@/components/ProfilePreview";
 import { SaveImageButton } from "@/components/SaveImageButton";
 import { TemplateSelector } from "@/components/TemplateSelector";
+import { affiliateLinks } from "@/data/affiliateLinks";
 import { defaultProfileData, type ProfileData } from "@/data/formFields";
 import { getTemplateById, templates, type TemplateCategory } from "@/data/templates";
 import { createPostText } from "@/lib/postText";
@@ -279,6 +280,24 @@ export default function CreatePage() {
               {copied ? "コピー済み" : "投稿文をコピー"}
             </button>
           </div>
+
+          <aside className="rounded-lg border border-[#f5cfdf] bg-white p-4 shadow-sm">
+            <p className="text-sm font-black leading-6 text-[#4b3342]">
+              プロフィール帳を作ったら、推し活ももっと楽しく🫶
+            </p>
+            <p className="mt-1 text-sm leading-6 text-[#7a6170]">
+              =LOVEのCD・Blu-ray・ライブ映像をDMMでチェック
+            </p>
+            <a
+              href={affiliateLinks.dmmIkolove}
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center rounded-lg bg-[#3f3342] px-4 py-3 text-sm font-black text-white transition hover:brightness-110"
+            >
+              DMMで見る
+            </a>
+            <p className="mt-2 text-xs font-bold text-[#9c8191]">※PRリンクを含みます</p>
+          </aside>
         </div>
       </div>
     </main>
