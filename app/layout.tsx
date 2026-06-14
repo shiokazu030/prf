@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "推しプロフメーカー",
-  description: "楽曲の雰囲気やメンバーカラーで作れる、推し活プロフィール帳メーカー"
+  title: "イコラブプロフメーカー",
+  description: "イコラブ好きのための、横長プロフィール帳メーカー"
 };
 
 export const viewport: Viewport = {

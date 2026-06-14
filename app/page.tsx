@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ImageDown, Palette, Sparkles } from "lucide-react";
-import { templates } from "@/data/templates";
 import { TemplateMiniPreview } from "@/components/TemplateMiniPreview";
+import { templates } from "@/data/templates";
 
 export default function Home() {
   const samples = ["royal-cute", "member-pink", "member-purple"].map(
@@ -15,14 +15,14 @@ export default function Home() {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full bg-white/[0.82] px-3 py-2 text-sm font-bold text-[#d85f91] shadow-sm">
               <Sparkles size={16} />
-              推し活プロフィール帳メーカー
+              イコラブ好きのためのプロフィール帳メーカー
             </p>
             <h1 className="mt-4 text-4xl font-black leading-tight tracking-normal text-[#3f3342] sm:text-5xl">
-              推しプロフメーカー
+              イコラブプロフメーカー
             </h1>
             <p className="mt-4 max-w-xl text-base leading-8 text-[#665866]">
-              プロフ画像と推し情報を入れて、Twitter / X に投稿しやすい横長プロフィール帳を作れます。
-              王道かわいいテンプレと、10色のメンバーカラーテンプレに対応しています。
+              プロフ画像と推し情報を入れるだけで、Xに投稿しやすい横長プロフィール帳を作れます。
+              王道かわいい基本テンプレと、10色のメンバーカラーテンプレに対応しています。
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -36,7 +36,7 @@ export default function Home() {
                 href="/create?category=member"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg border-2 border-[#e8cfdf] bg-white/[0.82] px-6 py-4 text-base font-black text-[#3f3342] shadow-sm transition hover:bg-white"
               >
-                色を選ぶ
+                メンバーカラーを選ぶ
               </Link>
             </div>
           </div>
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
             <h2 className="text-xl font-black text-[#3f3342]">楽曲イメージ</h2>
             <p className="mt-2 text-sm leading-7 text-[#665866]">
-              まずは王道かわいいをベースに、推し画像入りの横長プロフィール帳を作れます。
+              公式画像や歌詞は使わず、曲の雰囲気だけを抽象化したプロフィール帳テンプレです。
             </p>
           </Link>
           <Link

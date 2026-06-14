@@ -14,29 +14,37 @@ export function ProfileForm({
     onChange({ ...profile, [field.key]: value });
   };
 
+  const updateImagePosition = (value: string) => {
+    onChange({ ...profile, profileImageY: value });
+  };
+
   const updateImage = async (file: File | undefined) => {
     if (!file) return;
-    const objectUrl = URL.createObjectURL(file);
-    const image = new Image();
-    image.src = objectUrl;
-    await image.decode();
 
-    const maxSize = 1000;
-    const scale = Math.min(maxSize / image.naturalWidth, maxSize / image.naturalHeight, 1);
-    const width = Math.max(1, Math.round(image.naturalWidth * scale));
-    const height = Math.max(1, Math.round(image.naturalHeight * scale));
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const context = canvas.getContext("2d");
-    if (!context) {
+    const objectUrl = URL.createObjectURL(file);
+    try {
+      const image = new Image();
+      image.src = objectUrl;
+      await image.decode();
+
+      const maxSize = 1200;
+      const scale = Math.min(maxSize / image.naturalWidth, maxSize / image.naturalHeight, 1);
+      const width = Math.max(1, Math.round(image.naturalWidth * scale));
+      const height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      context.fillStyle = "#fff8fb";
+      context.fillRect(0, 0, width, height);
+      context.drawImage(image, 0, 0, width, height);
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+      onChange({ ...profile, profileImage: dataUrl, profileImageY: profile.profileImageY || "50" });
+    } finally {
       URL.revokeObjectURL(objectUrl);
-      return;
     }
-    context.drawImage(image, 0, 0, width, height);
-    const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-    URL.revokeObjectURL(objectUrl);
-    onChange({ ...profile, profileImage: dataUrl });
   };
 
   return (
@@ -55,7 +63,12 @@ export function ProfileForm({
           <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-[#f0a9c5] bg-white text-xs font-bold text-[#d982a5]">
             {profile.profileImage ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={profile.profileImage} alt="" className="h-full w-full object-cover" />
+              <img
+                src={profile.profileImage}
+                alt=""
+                className="h-full w-full object-cover"
+                style={{ objectPosition: `center ${profile.profileImageY || "50"}%` }}
+              />
             ) : (
               "画像"
             )}
@@ -67,9 +80,30 @@ export function ProfileForm({
               onChange={(event) => updateImage(event.target.files?.[0])}
               className="block w-full text-sm text-[#5d4654] file:mr-3 file:rounded-md file:border-0 file:bg-[#e85f94] file:px-4 file:py-2 file:text-sm file:font-bold file:text-white"
             />
+            {profile.profileImage ? (
+              <div className="mt-3">
+                <div className="mb-1 flex items-center justify-between text-xs font-bold text-[#7a6170]">
+                  <span>画像の上下位置</span>
+                  <span>{profile.profileImageY || "50"}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={profile.profileImageY || "50"}
+                  onChange={(event) => updateImagePosition(event.target.value)}
+                  className="w-full accent-[#e85f94]"
+                />
+                <div className="mt-1 flex justify-between text-[11px] font-bold text-[#b9859d]">
+                  <span>上</span>
+                  <span>中央</span>
+                  <span>下</span>
+                </div>
+              </div>
+            ) : null}
             <button
               type="button"
-              onClick={() => onChange({ ...profile, profileImage: "" })}
+              onClick={() => onChange({ ...profile, profileImage: "", profileImageY: "50" })}
               className="mt-2 text-xs font-bold text-[#d982a5]"
             >
               画像を外す

@@ -123,7 +123,7 @@ export default function CreatePage() {
   const previewScale = Math.min(previewFrameWidth / 1600, 1);
 
   const savePng = async () => {
-    if (!previewRef.current) return;
+    if (!previewRef.current || !selectedTemplate) return;
 
     setSaving(true);
     try {
@@ -140,12 +140,12 @@ export default function CreatePage() {
       });
       if (!blob) return;
 
-      const fileName = `oshi-profile-${selectedTemplate.id}.png`;
+      const fileName = `ikolove-profile-${selectedTemplate.id}.png`;
       const file = new File([blob], fileName, { type: "image/png" });
       const shareData = {
         files: [file],
-        title: "推しプロフィール帳",
-        text: "プロフィール帳作ってみました♡"
+        title: "イコラブプロフィール帳",
+        text: "イコラブプロフィール帳作ってみました♡"
       };
 
       if (navigator.canShare?.(shareData)) {
@@ -177,7 +177,7 @@ export default function CreatePage() {
     );
   }
 
-  if (!selectedTemplateId) {
+  if (!selectedTemplateId || !selectedTemplate) {
     return (
       <main className="min-h-screen">
         <div className="mx-auto max-w-6xl px-4 pt-5">
@@ -223,7 +223,7 @@ export default function CreatePage() {
               <p className="text-xs font-black uppercase tracking-[0.12em] text-[#e85f94]">STEP 3</p>
               <h1 className="mt-1 text-xl font-black text-[#4b3342]">プレビュー</h1>
               <p className="mt-1 text-sm leading-6 text-[#7a6170]">
-                この部分だけがPNG保存されます。プロフィール帳らしい横長の1600×900pxです。
+                この部分だけがPNG保存されます。横長の1600x900pxです。
               </p>
             </div>
 

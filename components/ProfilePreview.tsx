@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import type { ProfileData } from "@/data/formFields";
 import type { ProfileTemplate } from "@/data/templates";
 
-const blank = "＿＿＿＿＿＿＿＿";
+const blank = "＿＿＿＿＿＿";
 
 function valueOrBlank(value?: string) {
   return value?.trim() ? value : blank;
@@ -23,6 +23,15 @@ function noteFontSize(value?: string) {
   if (length > 45) return 22;
   return 24;
 }
+
+type PreviewColors = {
+  accent: string;
+  frame: string;
+  line: string;
+  lineSoft: string;
+  pale: string;
+  text: string;
+};
 
 function LineField({
   label,
@@ -53,6 +62,8 @@ function LineField({
           color: colors.text,
           display: "-webkit-box",
           fontSize: singleLineFontSize(value),
+          overflowWrap: "normal",
+          wordBreak: "keep-all",
           WebkitBoxOrient: "vertical",
           WebkitLineClamp: 2
         }}
@@ -108,7 +119,7 @@ function NoteBox({
   );
 }
 
-function PhotoBox({ image, colors }: { image?: string; colors: PreviewColors }) {
+function PhotoBox({ image, imageY, colors }: { image?: string; imageY?: string; colors: PreviewColors }) {
   return (
     <div className="flex h-full flex-col rounded-[24px] border-[3px] bg-white/[0.88] p-4" style={{ borderColor: colors.frame }}>
       <div
@@ -119,20 +130,19 @@ function PhotoBox({ image, colors }: { image?: string; colors: PreviewColors }) 
       </div>
       <div
         className="relative flex-1 overflow-hidden rounded-[22px] border-[4px] border-dotted"
-        style={
-          image
-            ? {
-                backgroundImage: `url("${image}")`,
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-                borderColor: colors.line,
-                backgroundColor: colors.pale
-              }
-            : { borderColor: colors.line, backgroundColor: colors.pale }
-        }
+        style={{ borderColor: colors.line, backgroundColor: colors.pale }}
       >
         {image ? (
-          <span className="sr-only">プロフィール画像</span>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt="プロフィール画像"
+            className="absolute inset-0 h-full w-full object-cover"
+            crossOrigin="anonymous"
+            decoding="sync"
+            loading="eager"
+            style={{ objectPosition: `center ${imageY || "50"}%` }}
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center text-[72px] font-black" style={{ color: colors.line }}>
             ♡
@@ -143,15 +153,6 @@ function PhotoBox({ image, colors }: { image?: string; colors: PreviewColors }) 
   );
 }
 
-type PreviewColors = {
-  accent: string;
-  frame: string;
-  line: string;
-  lineSoft: string;
-  pale: string;
-  text: string;
-};
-
 function Decoration({ colors }: { colors: PreviewColors }) {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -159,21 +160,18 @@ function Decoration({ colors }: { colors: PreviewColors }) {
       <div className="absolute right-[70px] top-[54px] text-[46px] font-black" style={{ color: colors.line }}>✦</div>
       <div className="absolute left-[72px] bottom-[56px] text-[42px] font-black" style={{ color: colors.line }}>✧</div>
       <div className="absolute right-[58px] bottom-[48px] text-[50px] font-black" style={{ color: colors.line }}>♡</div>
-      <div className="absolute left-[180px] top-[84px] rounded-full px-8 py-2 text-[28px] font-black shadow-sm" style={{ backgroundColor: colors.pale, color: colors.accent }}>
-        ୨୧
-      </div>
       <div className="absolute inset-x-[84px] top-[148px] border-t-[5px] border-dotted" style={{ borderColor: colors.line }} />
       <div className="absolute inset-x-[84px] bottom-[132px] border-t-[5px] border-dotted" style={{ borderColor: colors.line }} />
-      {Array.from({ length: 26 }).map((_, index) => (
+      {Array.from({ length: 22 }).map((_, index) => (
         <span
           key={index}
-          className="absolute rounded-full opacity-[0.65]"
+          className="absolute rounded-full opacity-[0.55]"
           style={{
             backgroundColor: colors.line,
-            left: `${7 + ((index * 19) % 86)}%`,
-            top: `${10 + ((index * 31) % 78)}%`,
-            width: `${8 + (index % 3) * 4}px`,
-            height: `${8 + (index % 3) * 4}px`
+            left: `${8 + ((index * 19) % 84)}%`,
+            top: `${11 + ((index * 31) % 76)}%`,
+            width: `${7 + (index % 3) * 3}px`,
+            height: `${7 + (index % 3) * 3}px`
           }}
         />
       ))}
@@ -221,13 +219,13 @@ export const ProfilePreview = forwardRef<
               <span>✦</span>
             </div>
             <h1 className="text-[40px] font-black leading-none tracking-normal" style={{ color: colors.text }}>
-              推しプロフィール帳
+              イコラブプロフィール帳
             </h1>
           </header>
 
           <div className="grid min-h-0 flex-1 grid-cols-[0.58fr_1fr_1.05fr] gap-4 overflow-hidden">
             <div className="grid min-h-0 grid-rows-[1.4fr_0.55fr_0.55fr] gap-3.5">
-              <PhotoBox image={profile.profileImage} colors={colors} />
+              <PhotoBox image={profile.profileImage} imageY={profile.profileImageY} colors={colors} />
               <LineField label="名前" value={profile.name} colors={colors} />
               <LineField label="推し" value={profile.oshiMember} colors={colors} />
             </div>
@@ -264,7 +262,7 @@ export const ProfilePreview = forwardRef<
 
           <footer className="mt-auto flex shrink-0 items-center justify-between pt-2 text-[17px] font-black" style={{ color: colors.accent }}>
             <span>♡ 仲良くしてください ♡</span>
-            <span>created by 推しプロフメーカー</span>
+            <span>created by イコラブプロフメーカー</span>
           </footer>
         </div>
       </div>
