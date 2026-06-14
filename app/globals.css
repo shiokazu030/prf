@@ -36,6 +36,7 @@ textarea {
 }
 
 .preview-safe-text {
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
   word-break: normal;
+  line-break: strict;
 }
