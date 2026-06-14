@@ -137,7 +137,7 @@ export const ProfilePreview = forwardRef<
   return (
     <div
       ref={ref}
-      className="relative h-[1200px] w-[1200px] overflow-hidden p-[44px]"
+      className="relative h-[900px] w-[1600px] overflow-hidden p-[42px]"
       style={{
         background,
         color: template.textColor
@@ -146,47 +146,48 @@ export const ProfilePreview = forwardRef<
       <Decoration />
 
       <div className="relative h-full rounded-[48px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
-        <div className="flex h-full flex-col rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] pb-[20px] pt-[24px]">
+        <div className="flex h-full flex-col rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] pb-[18px] pt-[22px]">
           <header className="mb-4 shrink-0 text-center">
-            <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full bg-[#ffe3ed] px-7 py-2 text-[21px] font-black text-[#d94d86]">
+            <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full bg-[#ffe3ed] px-7 py-2 text-[20px] font-black text-[#d94d86]">
               <span>✦</span>
               Profile Book
               <span>✦</span>
             </div>
-            <h1 className="text-[48px] font-black leading-none tracking-normal text-[#4b3342]">
+            <h1 className="text-[44px] font-black leading-none tracking-normal text-[#4b3342]">
               推しプロフィール帳
             </h1>
           </header>
 
-          <section className="grid shrink-0 grid-cols-2 gap-4">
-            <LineField label="名前" value={profile.name} />
-            <LineField label="推し" value={profile.oshiMember} />
-          </section>
+          <div className="grid flex-1 grid-cols-[1fr_1.05fr] gap-4">
+            <div className="grid content-start gap-4">
+              <section className="grid grid-cols-2 gap-4">
+                <LineField label="名前" value={profile.name} />
+                <LineField label="推し" value={profile.oshiMember} />
+              </section>
 
-          <section className="mt-4 grid shrink-0 grid-cols-3 gap-4">
-            <LineField label="誕生日" value={profile.birthday} />
-            <LineField label="血液型" value={profile.bloodType} />
-            <LineField label="住み" value={profile.location} />
-          </section>
+              <section className="grid grid-cols-3 gap-4">
+                <LineField label="誕生日" value={profile.birthday} />
+                <LineField label="血液型" value={profile.bloodType} />
+                <LineField label="住み" value={profile.location} />
+              </section>
 
-          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
-            <LineField label="X ID" value={profile.xId} />
-            <LineField label="同担" value={profile.sameFan} />
-          </section>
+              <section className="grid grid-cols-2 gap-4">
+                <LineField label="X ID" value={profile.xId} />
+                <LineField label="同担" value={profile.sameFan} />
+              </section>
 
-          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
-            <LineField label="好きな曲" value={profile.favoriteSong} />
-            <LineField label="推し始めた時期" value={profile.startedAt} />
-          </section>
+              <section className="grid grid-cols-2 gap-4">
+                <LineField label="好きな曲" value={profile.favoriteSong} />
+                <LineField label="推し始めた時期" value={profile.startedAt} />
+              </section>
+            </div>
 
-          <section className="mt-4 shrink-0">
-            <NoteBox label="参戦予定" value={profile.nextPlans} lines={2} />
-          </section>
-
-          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
-            <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={2} />
-            <NoteBox label="ひとこと" value={profile.freeMessage} lines={2} />
-          </section>
+            <div className="grid content-start gap-4">
+              <NoteBox label="参戦予定" value={profile.nextPlans} lines={3} />
+              <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={4} />
+              <NoteBox label="ひとこと" value={profile.freeMessage} lines={3} />
+            </div>
+          </div>
 
           <footer className="mt-auto flex shrink-0 items-center justify-between pt-3 text-[17px] font-black text-[#d982a5]">
             <span>♡ 仲良くしてください ♡</span>

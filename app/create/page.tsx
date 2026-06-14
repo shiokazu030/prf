@@ -90,7 +90,7 @@ export default function CreatePage() {
   }, [profile, ready, selectedTemplateId]);
 
   const selectedTemplate = useMemo(() => getTemplateById(selectedTemplateId), [selectedTemplateId]);
-  const previewScale = Math.min(previewFrameWidth / 1200, 1);
+  const previewScale = Math.min(previewFrameWidth / 1600, 1);
 
   const savePng = async () => {
     if (!previewRef.current) return;
@@ -100,11 +100,11 @@ export default function CreatePage() {
       const dataUrl = await toPng(previewRef.current, {
         cacheBust: true,
         pixelRatio: 2,
-        width: 1200,
-        height: 1200,
+        width: 1600,
+        height: 900,
         style: {
-          width: "1200px",
-          height: "1200px"
+          width: "1600px",
+          height: "900px"
         }
       });
       const link = document.createElement("a");
@@ -176,17 +176,17 @@ export default function CreatePage() {
               <p className="text-xs font-black uppercase tracking-[0.12em] text-[#e85f94]">STEP 3</p>
               <h1 className="mt-1 text-xl font-black text-[#4b3342]">プレビュー</h1>
               <p className="mt-1 text-sm leading-6 text-[#7a6170]">
-                この部分だけがPNG保存されます。Xに投稿しやすい1200×1200pxです。
+                この部分だけがPNG保存されます。プロフィール帳らしい横長の1600×900pxです。
               </p>
             </div>
 
             <div
               ref={previewFrameRef}
-              className="relative mx-auto aspect-square w-full max-w-[560px] overflow-hidden rounded-lg border border-[#f5cfdf] bg-white shadow-sm"
+              className="relative mx-auto aspect-video w-full max-w-[720px] overflow-hidden rounded-lg border border-[#f5cfdf] bg-white shadow-sm"
             >
               <div
                 className="absolute left-0 top-0 origin-top-left"
-                style={{ width: 1200, height: 1200, transform: `scale(${previewScale})` }}
+                style={{ width: 1600, height: 900, transform: `scale(${previewScale})` }}
               >
                 <ProfilePreview ref={previewRef} template={selectedTemplate} profile={profile} />
               </div>
