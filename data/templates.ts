@@ -222,6 +222,19 @@ export const templates: ProfileTemplate[] = [
     frameStyle: "#c7a5ff",
     accentStyle: "#8762cc",
     textColor: "#4b3c62"
+  },
+  {
+    id: "member-purple",
+    category: "member",
+    title: "紫",
+    description: "大人っぽく上品。夜のステージ感ときらめきを入れた推し色テンプレ。",
+    palette: ["#fbf7ff", "#8b5cf6", "#ded1ff", "#ffffff"],
+    decorations: ["star", "sparkle", "moon"],
+    mood: "上品",
+    backgroundStyle: "linear-gradient(135deg, #fbf7ff 0%, #ded1ff 54%, #ffffff 100%)",
+    frameStyle: "#a78bfa",
+    accentStyle: "#7c3aed",
+    textColor: "#44315f"
   }
 ];
 

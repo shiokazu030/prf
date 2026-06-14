@@ -16,5 +16,6 @@ export const members: Member[] = [
   { id: "yuzu", name: "日向 ゆず", groupName: "Sample Stars", colorName: "黄色", colorHex: "#ffd84f", templateId: "member-yellow" },
   { id: "rinka", name: "紅月 りんか", groupName: "Sample Stars", colorName: "赤", colorHex: "#f05252", templateId: "member-red" },
   { id: "shiro", name: "白瀬 しろ", groupName: "Sample Stars", colorName: "白", colorHex: "#e8edf2", templateId: "member-white" },
-  { id: "sumire", name: "月乃 すみれ", groupName: "Sample Stars", colorName: "薄紫", colorHex: "#c7a5ff", templateId: "member-lavender" }
+  { id: "sumire", name: "月乃 すみれ", groupName: "Sample Stars", colorName: "薄紫", colorHex: "#c7a5ff", templateId: "member-lavender" },
+  { id: "miyabi", name: "紫乃 みやび", groupName: "Sample Stars", colorName: "紫", colorHex: "#8b5cf6", templateId: "member-purple" }
 ];
