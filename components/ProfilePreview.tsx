@@ -153,13 +153,45 @@ function PhotoBox({ image, imageY, colors }: { image?: string; imageY?: string; 
   );
 }
 
-function Decoration({ colors }: { colors: PreviewColors }) {
+function Decoration({ colors, templateId }: { colors: PreviewColors; templateId: string }) {
+  const isDarkAddiction = templateId === "dark-addiction";
+
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute left-[44px] top-[40px] text-[54px] font-black" style={{ color: colors.line }}>♡</div>
       <div className="absolute right-[70px] top-[54px] text-[46px] font-black" style={{ color: colors.line }}>✦</div>
       <div className="absolute left-[72px] bottom-[56px] text-[42px] font-black" style={{ color: colors.line }}>✧</div>
       <div className="absolute right-[58px] bottom-[48px] text-[50px] font-black" style={{ color: colors.line }}>♡</div>
+      {isDarkAddiction ? (
+        <>
+          <div className="absolute left-[118px] top-[82px] h-[680px] w-[20px] rounded-full opacity-80" style={{ backgroundColor: colors.accent }} />
+          <div className="absolute right-[118px] top-[82px] h-[680px] w-[20px] rounded-full opacity-80" style={{ backgroundColor: colors.accent }} />
+          {Array.from({ length: 10 }).map((_, index) => (
+            <span
+              key={`lace-left-${index}`}
+              className="absolute h-[4px] w-[132px] origin-left rounded-full opacity-75"
+              style={{
+                backgroundColor: colors.accent,
+                left: 128,
+                top: 126 + index * 58,
+                transform: `rotate(${index % 2 === 0 ? 16 : -16}deg)`
+              }}
+            />
+          ))}
+          {Array.from({ length: 10 }).map((_, index) => (
+            <span
+              key={`lace-right-${index}`}
+              className="absolute h-[4px] w-[132px] origin-right rounded-full opacity-75"
+              style={{
+                backgroundColor: colors.accent,
+                right: 128,
+                top: 126 + index * 58,
+                transform: `rotate(${index % 2 === 0 ? -16 : 16}deg)`
+              }}
+            />
+          ))}
+        </>
+      ) : null}
       <div className="absolute inset-x-[84px] top-[148px] border-t-[5px] border-dotted" style={{ borderColor: colors.line }} />
       <div className="absolute inset-x-[84px] bottom-[132px] border-t-[5px] border-dotted" style={{ borderColor: colors.line }} />
       {Array.from({ length: 22 }).map((_, index) => (
@@ -187,11 +219,12 @@ export const ProfilePreview = forwardRef<
   }
 >(function ProfilePreview({ template, profile }, ref) {
   const isRoyalCute = template.id === "royal-cute";
+  const isDarkAddiction = template.id === "dark-addiction";
   const colors: PreviewColors = {
     accent: isRoyalCute ? "#e85f94" : template.accentStyle,
     frame: isRoyalCute ? "#f4b8cf" : template.frameStyle,
-    line: isRoyalCute ? "#f0a9c5" : template.palette[1],
-    lineSoft: isRoyalCute ? "rgba(240,169,197,0.32)" : `${template.palette[1]}55`,
+    line: isRoyalCute ? "#f0a9c5" : isDarkAddiction ? "#a5163d" : template.palette[1],
+    lineSoft: isRoyalCute ? "rgba(240,169,197,0.32)" : isDarkAddiction ? "rgba(165,22,61,0.22)" : `${template.palette[1]}55`,
     pale: isRoyalCute ? "#ffe3ed" : template.palette[2],
     text: isRoyalCute ? "#56384a" : template.textColor
   };
@@ -208,14 +241,20 @@ export const ProfilePreview = forwardRef<
         color: template.textColor
       }}
     >
-      <Decoration colors={colors} />
+      <Decoration colors={colors} templateId={template.id} />
 
       <div className="relative h-full rounded-[46px] border-[8px] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]" style={{ borderColor: colors.line }}>
-        <div className="flex h-full flex-col rounded-[34px] border-[4px] border-dashed bg-[#fffafd] px-[34px] pb-[24px] pt-[18px]" style={{ borderColor: colors.frame }}>
+        <div
+          className="flex h-full flex-col rounded-[34px] border-[4px] border-dashed px-[34px] pb-[24px] pt-[18px]"
+          style={{
+            borderColor: colors.frame,
+            backgroundColor: isDarkAddiction ? "rgba(247, 252, 255, 0.88)" : "#fffafd"
+          }}
+        >
           <header className="mb-3 shrink-0 text-center">
             <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full px-7 py-2 text-[20px] font-black" style={{ backgroundColor: colors.pale, color: colors.accent }}>
               <span>✦</span>
-              Profile Book
+              {isRoyalCute ? "Profile Book" : template.title}
               <span>✦</span>
             </div>
             <h1 className="text-[40px] font-black leading-none tracking-normal" style={{ color: colors.text }}>

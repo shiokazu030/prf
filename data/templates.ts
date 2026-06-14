@@ -57,15 +57,15 @@ export const templates: ProfileTemplate[] = [
   {
     id: "dark-addiction",
     category: "song",
-    title: "ダーク中毒",
-    description: "黒、濃いピンク、赤紫。毒っぽいけど可愛い雰囲気。",
-    palette: ["#211722", "#f35b9e", "#7c245f", "#ffd7ef"],
-    decorations: ["heart", "star", "dot"],
-    mood: "ビター",
-    backgroundStyle: "linear-gradient(135deg, #211722 0%, #4a183d 46%, #7c245f 100%)",
-    frameStyle: "#f35b9e",
-    accentStyle: "#ff85bd",
-    textColor: "#fff2fa"
+    title: "劇薬中毒イメージ",
+    description: "淡い水色にワインレッドのリボンを効かせた、甘さと強さのあるテンプレ。",
+    palette: ["#eef8ff", "#8c1434", "#d8edf8", "#2b1c2a"],
+    decorations: ["ribbon", "lace", "sparkle", "star"],
+    mood: "甘くて危うい",
+    backgroundStyle: "linear-gradient(135deg, #f6fbff 0%, #d8edf8 44%, #fff1f7 72%, #f8fbff 100%)",
+    frameStyle: "#8c1434",
+    accentStyle: "#a5163d",
+    textColor: "#392533"
   },
   {
     id: "sparkle-idol",
