@@ -36,13 +36,13 @@ function LineField({
   const hasValue = Boolean(value?.trim());
 
   return (
-    <div className={`min-h-[82px] rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.82] px-5 py-3 ${className}`}>
+    <div className={`flex h-full min-h-[82px] flex-col rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.82] px-5 py-3 ${className}`}>
       <div className="mb-1 flex items-center gap-2 text-[20px] font-black text-[#e85f94]">
         <span className="text-[17px]">♡</span>
         {label}
       </div>
       <div
-        className={`preview-safe-text overflow-hidden border-b-[4px] border-dotted border-[#f0a9c5] pb-1 font-black leading-tight text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text mt-auto overflow-hidden border-b-[4px] border-dotted border-[#f0a9c5] pb-1 font-black leading-tight text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
         style={{
           display: "-webkit-box",
           fontSize: singleLineFontSize(value),
@@ -69,20 +69,18 @@ function NoteBox({
 }) {
   const hasValue = Boolean(value?.trim());
   const lineHeight = 26;
-  const contentHeight = lines * lineHeight + 12;
 
   return (
-    <div className={`rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-2.5 ${className}`}>
-      <div className="mb-1.5 inline-flex rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[19px] font-black text-[#d94d86]">
+    <div className={`flex h-full flex-col rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-2.5 ${className}`}>
+      <div className="mb-1.5 inline-flex w-fit rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[19px] font-black text-[#d94d86]">
         {label}
       </div>
       <div
-        className={`preview-safe-text overflow-hidden whitespace-pre-wrap rounded-[15px] bg-[linear-gradient(#fff_0,#fff_26px,#ffe1ec_27px)] px-4 py-1.5 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text flex-1 overflow-hidden whitespace-pre-wrap rounded-[15px] bg-[linear-gradient(#fff_0,#fff_26px,#ffe1ec_27px)] px-4 py-1.5 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
         style={{
           display: "-webkit-box",
           fontSize: noteFontSize(value),
           lineHeight: `${lineHeight}px`,
-          minHeight: contentHeight,
           WebkitBoxOrient: "vertical",
           WebkitLineClamp: lines
         }}
@@ -158,31 +156,31 @@ export const ProfilePreview = forwardRef<
             </h1>
           </header>
 
-          <div className="grid flex-1 grid-cols-[1fr_1.05fr] gap-4 overflow-hidden">
-            <div className="grid content-start gap-3.5">
-              <section className="grid grid-cols-2 gap-4">
+          <div className="grid min-h-0 flex-1 grid-cols-[1fr_1.05fr] gap-4 overflow-hidden">
+            <div className="grid min-h-0 grid-rows-4 gap-3.5">
+              <section className="grid min-h-0 grid-cols-2 gap-4">
                 <LineField label="名前" value={profile.name} />
                 <LineField label="推し" value={profile.oshiMember} />
               </section>
 
-              <section className="grid grid-cols-3 gap-4">
+              <section className="grid min-h-0 grid-cols-3 gap-4">
                 <LineField label="誕生日" value={profile.birthday} />
                 <LineField label="血液型" value={profile.bloodType} />
                 <LineField label="住み" value={profile.location} />
               </section>
 
-              <section className="grid grid-cols-2 gap-4">
+              <section className="grid min-h-0 grid-cols-2 gap-4">
                 <LineField label="X ID" value={profile.xId} />
                 <LineField label="同担" value={profile.sameFan} />
               </section>
 
-              <section className="grid grid-cols-2 gap-4">
+              <section className="grid min-h-0 grid-cols-2 gap-4">
                 <LineField label="好きな曲" value={profile.favoriteSong} />
                 <LineField label="推し始めた時期" value={profile.startedAt} />
               </section>
             </div>
 
-            <div className="grid content-start gap-3.5">
+            <div className="grid min-h-0 grid-rows-[0.9fr_1.25fr_0.9fr] gap-3.5">
               <NoteBox label="参戦予定" value={profile.nextPlans} lines={2} />
               <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={3} />
               <NoteBox label="ひとこと" value={profile.freeMessage} lines={2} />
