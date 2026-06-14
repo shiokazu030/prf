@@ -97,10 +97,20 @@ function PhotoBox({ image }: { image?: string }) {
       <div className="mb-3 inline-flex w-fit rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[19px] font-black text-[#d94d86]">
         プロフ画像
       </div>
-      <div className="relative flex-1 overflow-hidden rounded-[22px] border-[4px] border-dotted border-[#f0a9c5] bg-[#fff1f6]">
+      <div
+        className="relative flex-1 overflow-hidden rounded-[22px] border-[4px] border-dotted border-[#f0a9c5] bg-[#fff1f6]"
+        style={
+          image
+            ? {
+                backgroundImage: `url("${image}")`,
+                backgroundPosition: "center",
+                backgroundSize: "cover"
+              }
+            : undefined
+        }
+      >
         {image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={image} alt="" className="h-full w-full object-cover" />
+          <span className="sr-only">プロフィール画像</span>
         ) : (
           <div className="flex h-full w-full items-center justify-center text-[72px] font-black text-[#f0a9c5]">
             ♡

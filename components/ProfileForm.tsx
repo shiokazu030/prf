@@ -14,13 +14,29 @@ export function ProfileForm({
     onChange({ ...profile, [field.key]: value });
   };
 
-  const updateImage = (file: File | undefined) => {
+  const updateImage = async (file: File | undefined) => {
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      onChange({ ...profile, profileImage: String(reader.result ?? "") });
-    };
-    reader.readAsDataURL(file);
+    const objectUrl = URL.createObjectURL(file);
+    const image = new Image();
+    image.src = objectUrl;
+    await image.decode();
+
+    const maxSize = 1000;
+    const scale = Math.min(maxSize / image.naturalWidth, maxSize / image.naturalHeight, 1);
+    const width = Math.max(1, Math.round(image.naturalWidth * scale));
+    const height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+    if (!context) {
+      URL.revokeObjectURL(objectUrl);
+      return;
+    }
+    context.drawImage(image, 0, 0, width, height);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+    URL.revokeObjectURL(objectUrl);
+    onChange({ ...profile, profileImage: dataUrl });
   };
 
   return (
