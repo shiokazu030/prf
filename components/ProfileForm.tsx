@@ -14,6 +14,15 @@ export function ProfileForm({
     onChange({ ...profile, [field.key]: value });
   };
 
+  const updateImage = (file: File | undefined) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      onChange({ ...profile, profileImage: String(reader.result ?? "") });
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <section className="rounded-lg border border-[#f5cfdf] bg-white p-4 shadow-soft sm:p-5">
       <div className="mb-5">
@@ -22,6 +31,35 @@ export function ProfileForm({
         <p className="mt-1 text-sm leading-6 text-[#7a6170]">
           空欄でもOKです。入力すると右側のプロフィール帳にすぐ反映されます。
         </p>
+      </div>
+
+      <div className="mb-4 rounded-lg border border-[#efcfdd] bg-[#fffafb] p-3">
+        <span className="mb-2 block text-sm font-bold text-[#5d4654]">プロフィール画像</span>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-[#f0a9c5] bg-white text-xs font-bold text-[#d982a5]">
+            {profile.profileImage ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={profile.profileImage} alt="" className="h-full w-full object-cover" />
+            ) : (
+              "画像"
+            )}
+          </div>
+          <div className="flex-1">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => updateImage(event.target.files?.[0])}
+              className="block w-full text-sm text-[#5d4654] file:mr-3 file:rounded-md file:border-0 file:bg-[#e85f94] file:px-4 file:py-2 file:text-sm file:font-bold file:text-white"
+            />
+            <button
+              type="button"
+              onClick={() => onChange({ ...profile, profileImage: "" })}
+              className="mt-2 text-xs font-bold text-[#d982a5]"
+            >
+              画像を外す
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">

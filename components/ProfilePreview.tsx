@@ -91,6 +91,26 @@ function NoteBox({
   );
 }
 
+function PhotoBox({ image }: { image?: string }) {
+  return (
+    <div className="flex h-full flex-col rounded-[24px] border-[3px] border-[#f4b8cf] bg-white/[0.88] p-4">
+      <div className="mb-3 inline-flex w-fit rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[19px] font-black text-[#d94d86]">
+        プロフ画像
+      </div>
+      <div className="relative flex-1 overflow-hidden rounded-[22px] border-[4px] border-dotted border-[#f0a9c5] bg-[#fff1f6]">
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt="" className="h-full w-full object-cover" />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-[72px] font-black text-[#f0a9c5]">
+            ♡
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function Decoration() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -156,11 +176,17 @@ export const ProfilePreview = forwardRef<
             </h1>
           </header>
 
-          <div className="grid min-h-0 flex-1 grid-cols-[1fr_1.05fr] gap-4 overflow-hidden">
+          <div className="grid min-h-0 flex-1 grid-cols-[0.58fr_1fr_1.05fr] gap-4 overflow-hidden">
+            <div className="grid min-h-0 grid-rows-[1.4fr_0.55fr_0.55fr] gap-3.5">
+              <PhotoBox image={profile.profileImage} />
+              <LineField label="名前" value={profile.name} />
+              <LineField label="推し" value={profile.oshiMember} />
+            </div>
+
             <div className="grid min-h-0 grid-rows-4 gap-3.5">
               <section className="grid min-h-0 grid-cols-2 gap-4">
-                <LineField label="名前" value={profile.name} />
-                <LineField label="推し" value={profile.oshiMember} />
+                <LineField label="X ID" value={profile.xId} />
+                <LineField label="好きなペア" value={profile.favoritePair} />
               </section>
 
               <section className="grid min-h-0 grid-cols-3 gap-4">
@@ -170,18 +196,18 @@ export const ProfilePreview = forwardRef<
               </section>
 
               <section className="grid min-h-0 grid-cols-2 gap-4">
-                <LineField label="X ID" value={profile.xId} />
-                <LineField label="同担" value={profile.sameFan} />
+                <LineField label="好きな曲" value={profile.favoriteSong} />
+                <LineField label="推し始めた時期" value={profile.startedAt} />
               </section>
 
               <section className="grid min-h-0 grid-cols-2 gap-4">
-                <LineField label="好きな曲" value={profile.favoriteSong} />
-                <LineField label="推し始めた時期" value={profile.startedAt} />
+                <LineField label="参戦予定" value={profile.nextPlans} />
+                <LineField label="好きな衣装" value={profile.favoriteCostume} />
               </section>
             </div>
 
             <div className="grid min-h-0 grid-rows-[0.9fr_1.25fr_0.9fr] gap-3.5">
-              <NoteBox label="参戦予定" value={profile.nextPlans} lines={2} />
+              <NoteBox label="イコラブで好きなところ" value={profile.ikolovePoint} lines={2} />
               <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={3} />
               <NoteBox label="ひとこと" value={profile.freeMessage} lines={2} />
             </div>
