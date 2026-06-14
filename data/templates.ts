@@ -66,7 +66,7 @@ export const templates: ProfileTemplate[] = [
       "radial-gradient(circle at 22% 16%, rgba(53,211,181,0.32) 0 4%, transparent 16%), linear-gradient(135deg, #080b12 0%, #182235 46%, #31415f 100%)",
     frameStyle: "#5f6f91",
     accentStyle: "#4f8fcf",
-    textColor: "#f4f7ff"
+    textColor: "#253044"
   },
   {
     id: "pale-fragile",
