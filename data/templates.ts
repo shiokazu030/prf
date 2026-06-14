@@ -44,15 +44,15 @@ export const templates: ProfileTemplate[] = [
   {
     id: "sweet-romance",
     category: "song",
-    title: "甘め恋愛",
-    description: "クリーム色と淡ピンクの、ときめきリボンテンプレ。",
-    palette: ["#fff7df", "#ffb7c8", "#fffaf0", "#f5a7b8"],
-    decorations: ["ribbon", "heart", "flower"],
-    mood: "ときめき",
-    backgroundStyle: "linear-gradient(135deg, #fff7df 0%, #ffe8ee 58%, #fffaf2 100%)",
-    frameStyle: "#f2a7b7",
-    accentStyle: "#d87087",
-    textColor: "#5b3a37"
+    title: "とくべチュ、してイメージ",
+    description: "真っ赤なフリルと白ハートで、特別感たっぷりの甘いテンプレ。",
+    palette: ["#fff7fa", "#e60033", "#ffe2ea", "#ffffff"],
+    decorations: ["heart", "ribbon", "lace", "sparkle"],
+    mood: "特別な赤",
+    backgroundStyle: "linear-gradient(135deg, #fff8fb 0%, #ffe0e8 42%, #fffefe 64%, #ffd3df 100%)",
+    frameStyle: "#e60033",
+    accentStyle: "#d6002f",
+    textColor: "#4f2030"
   },
   {
     id: "dark-addiction",

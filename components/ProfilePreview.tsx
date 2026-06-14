@@ -155,6 +155,7 @@ function PhotoBox({ image, imageY, colors }: { image?: string; imageY?: string; 
 
 function Decoration({ colors, templateId }: { colors: PreviewColors; templateId: string }) {
   const isDarkAddiction = templateId === "dark-addiction";
+  const isSweetRomance = templateId === "sweet-romance";
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -162,6 +163,26 @@ function Decoration({ colors, templateId }: { colors: PreviewColors; templateId:
       <div className="absolute right-[70px] top-[54px] text-[46px] font-black" style={{ color: colors.line }}>✦</div>
       <div className="absolute left-[72px] bottom-[56px] text-[42px] font-black" style={{ color: colors.line }}>✧</div>
       <div className="absolute right-[58px] bottom-[48px] text-[50px] font-black" style={{ color: colors.line }}>♡</div>
+      {isSweetRomance ? (
+        <>
+          <div className="absolute right-[122px] top-[90px] text-[104px] font-black opacity-85" style={{ color: colors.accent }}>♡</div>
+          <div className="absolute left-[138px] bottom-[86px] text-[82px] font-black opacity-80" style={{ color: colors.accent }}>♡</div>
+          <div className="absolute left-[210px] top-[86px] rounded-full px-8 py-2 text-[27px] font-black shadow-sm" style={{ backgroundColor: "#ffffff", color: colors.accent }}>
+            frill heart
+          </div>
+          {Array.from({ length: 18 }).map((_, index) => (
+            <span
+              key={`frill-${index}`}
+              className="absolute h-[28px] w-[28px] rounded-full opacity-75"
+              style={{
+                backgroundColor: index % 2 === 0 ? colors.accent : colors.pale,
+                left: `${8 + index * 5}%`,
+                top: index % 2 === 0 ? 62 : 74
+              }}
+            />
+          ))}
+        </>
+      ) : null}
       {isDarkAddiction ? (
         <>
           <div className="absolute left-[118px] top-[82px] h-[680px] w-[20px] rounded-full opacity-80" style={{ backgroundColor: colors.accent }} />
@@ -220,11 +241,18 @@ export const ProfilePreview = forwardRef<
 >(function ProfilePreview({ template, profile }, ref) {
   const isRoyalCute = template.id === "royal-cute";
   const isDarkAddiction = template.id === "dark-addiction";
+  const isSweetRomance = template.id === "sweet-romance";
   const colors: PreviewColors = {
     accent: isRoyalCute ? "#e85f94" : template.accentStyle,
     frame: isRoyalCute ? "#f4b8cf" : template.frameStyle,
-    line: isRoyalCute ? "#f0a9c5" : isDarkAddiction ? "#a5163d" : template.palette[1],
-    lineSoft: isRoyalCute ? "rgba(240,169,197,0.32)" : isDarkAddiction ? "rgba(165,22,61,0.22)" : `${template.palette[1]}55`,
+    line: isRoyalCute ? "#f0a9c5" : isDarkAddiction ? "#a5163d" : isSweetRomance ? "#e60033" : template.palette[1],
+    lineSoft: isRoyalCute
+      ? "rgba(240,169,197,0.32)"
+      : isDarkAddiction
+        ? "rgba(165,22,61,0.22)"
+        : isSweetRomance
+          ? "rgba(230,0,51,0.18)"
+          : `${template.palette[1]}55`,
     pale: isRoyalCute ? "#ffe3ed" : template.palette[2],
     text: isRoyalCute ? "#56384a" : template.textColor
   };
@@ -248,7 +276,7 @@ export const ProfilePreview = forwardRef<
           className="flex h-full flex-col rounded-[34px] border-[4px] border-dashed px-[34px] pb-[24px] pt-[18px]"
           style={{
             borderColor: colors.frame,
-            backgroundColor: isDarkAddiction ? "rgba(247, 252, 255, 0.88)" : "#fffafd"
+            backgroundColor: isDarkAddiction ? "rgba(247, 252, 255, 0.88)" : isSweetRomance ? "rgba(255, 250, 252, 0.9)" : "#fffafd"
           }}
         >
           <header className="mb-3 shrink-0 text-center">
