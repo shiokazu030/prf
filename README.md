@@ -31,7 +31,7 @@ npm.cmd run dev
 
 - `/` トップページ
 - `/create` テンプレ選択とプロフィール作成
-- `/create?template=royal-cute` テンプレ指定で作成画面を開始
+- `/create?template=sweet-romance` テンプレ指定で作成画面を開始
 - `/create?category=member` カテゴリ指定でテンプレ選択
 
 ## フォルダ構成

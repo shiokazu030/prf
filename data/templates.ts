@@ -29,19 +29,6 @@ export const templateCategories: Record<TemplateCategory, { title: string; descr
 
 export const templates: ProfileTemplate[] = [
   {
-    id: "royal-cute",
-    category: "song",
-    title: "王道かわいい",
-    description: "ピンク、白、ハート、レースでふんわり可愛い王道感。",
-    palette: ["#fff8fb", "#ff8fba", "#ffffff", "#ffd7e6"],
-    decorations: ["heart", "lace", "ribbon", "dot"],
-    mood: "ふんわり",
-    backgroundStyle: "linear-gradient(135deg, #fff8fb 0%, #ffe1ec 48%, #ffffff 100%)",
-    frameStyle: "#ff9fc5",
-    accentStyle: "#e85f94",
-    textColor: "#5a3346"
-  },
-  {
     id: "sweet-romance",
     category: "song",
     title: "とくべチュ、してイメージ",

@@ -76,7 +76,13 @@ export default function CreatePage() {
       try {
         const stored = JSON.parse(storedRaw) as StoredState;
         setProfile({ ...defaultProfileData, ...stored.profile });
-        if (!templateId && !category && !resetTemplate && stored.templateId) {
+        if (
+          !templateId &&
+          !category &&
+          !resetTemplate &&
+          stored.templateId &&
+          templates.some((template) => template.id === stored.templateId)
+        ) {
           setSelectedTemplateId(stored.templateId);
         }
       } catch {

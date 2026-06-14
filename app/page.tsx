@@ -4,7 +4,7 @@ import { TemplateMiniPreview } from "@/components/TemplateMiniPreview";
 import { templates } from "@/data/templates";
 
 export default function Home() {
-  const samples = ["royal-cute", "member-pink", "member-purple"].map(
+  const samples = ["sweet-romance", "dark-addiction", "member-purple"].map(
     (id) => templates.find((template) => template.id === id) ?? templates[0]
   );
 
@@ -22,21 +22,21 @@ export default function Home() {
             </h1>
             <p className="mt-4 max-w-xl text-base leading-8 text-[#665866]">
               プロフ画像と推し情報を入れるだけで、Xに投稿しやすい横長プロフィール帳を作れます。
-              王道かわいい基本テンプレと、10色のメンバーカラーテンプレに対応しています。
+              楽曲イメージテンプレと、10色のメンバーカラーテンプレに対応しています。
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/create?template=royal-cute"
+                href="/create"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg bg-[#3f3342] px-6 py-4 text-base font-black text-white shadow-soft transition hover:brightness-110"
               >
-                まず作ってみる
+                テンプレを選ぶ
                 <ArrowRight size={20} />
               </Link>
               <Link
                 href="/create?category=member"
                 className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-lg border-2 border-[#e8cfdf] bg-white/[0.82] px-6 py-4 text-base font-black text-[#3f3342] shadow-sm transition hover:bg-white"
               >
-                メンバーカラーを選ぶ
+                色テンプレを見る
               </Link>
             </div>
           </div>
