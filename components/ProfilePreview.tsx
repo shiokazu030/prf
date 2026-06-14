@@ -59,26 +59,32 @@ function LineField({
 function NoteBox({
   label,
   value,
-  className = ""
+  className = "",
+  lines = 3
 }: {
   label: string;
   value?: string;
   className?: string;
+  lines?: number;
 }) {
   const hasValue = Boolean(value?.trim());
+  const lineHeight = 30;
+  const contentHeight = lines * lineHeight + 18;
 
   return (
-    <div className={`rounded-[22px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-4 ${className}`}>
+    <div className={`rounded-[22px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-3 ${className}`}>
       <div className="mb-2 inline-flex rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[20px] font-black text-[#d94d86]">
         {label}
       </div>
       <div
-        className={`preview-safe-text min-h-[90px] overflow-hidden whitespace-pre-wrap rounded-[16px] bg-[linear-gradient(#fff_0,#fff_32px,#ffe1ec_33px)] px-4 py-2 font-bold leading-[32px] text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text overflow-hidden whitespace-pre-wrap rounded-[16px] bg-[linear-gradient(#fff_0,#fff_30px,#ffe1ec_31px)] px-4 py-2 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
         style={{
           display: "-webkit-box",
           fontSize: noteFontSize(value),
+          lineHeight: `${lineHeight}px`,
+          minHeight: contentHeight,
           WebkitBoxOrient: "vertical",
-          WebkitLineClamp: 4
+          WebkitLineClamp: lines
         }}
       >
         {valueOrBlank(value)}
@@ -140,8 +146,8 @@ export const ProfilePreview = forwardRef<
       <Decoration />
 
       <div className="relative h-full rounded-[48px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
-        <div className="h-full rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] py-[26px]">
-          <header className="mb-5 text-center">
+        <div className="flex h-full flex-col rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] pb-[20px] pt-[24px]">
+          <header className="mb-4 shrink-0 text-center">
             <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full bg-[#ffe3ed] px-7 py-2 text-[21px] font-black text-[#d94d86]">
               <span>✦</span>
               Profile Book
@@ -152,37 +158,37 @@ export const ProfilePreview = forwardRef<
             </h1>
           </header>
 
-          <section className="grid grid-cols-2 gap-4">
+          <section className="grid shrink-0 grid-cols-2 gap-4">
             <LineField label="名前" value={profile.name} />
             <LineField label="推し" value={profile.oshiMember} />
           </section>
 
-          <section className="mt-4 grid grid-cols-3 gap-4">
+          <section className="mt-4 grid shrink-0 grid-cols-3 gap-4">
             <LineField label="誕生日" value={profile.birthday} />
             <LineField label="血液型" value={profile.bloodType} />
             <LineField label="住み" value={profile.location} />
           </section>
 
-          <section className="mt-4 grid grid-cols-2 gap-4">
+          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
             <LineField label="X ID" value={profile.xId} />
             <LineField label="同担" value={profile.sameFan} />
           </section>
 
-          <section className="mt-4 grid grid-cols-2 gap-4">
+          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
             <LineField label="好きな曲" value={profile.favoriteSong} />
             <LineField label="推し始めた時期" value={profile.startedAt} />
           </section>
 
-          <section className="mt-4">
-            <NoteBox label="参戦予定" value={profile.nextPlans} />
+          <section className="mt-4 shrink-0">
+            <NoteBox label="参戦予定" value={profile.nextPlans} lines={2} />
           </section>
 
-          <section className="mt-4 grid grid-cols-2 gap-4">
-            <NoteBox label="推しへの想い" value={profile.messageToOshi} />
-            <NoteBox label="ひとこと" value={profile.freeMessage} />
+          <section className="mt-4 grid shrink-0 grid-cols-2 gap-4">
+            <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={2} />
+            <NoteBox label="ひとこと" value={profile.freeMessage} lines={2} />
           </section>
 
-          <footer className="mt-4 flex items-center justify-between text-[18px] font-black text-[#d982a5]">
+          <footer className="mt-auto flex shrink-0 items-center justify-between pt-3 text-[17px] font-black text-[#d982a5]">
             <span>♡ 仲良くしてください ♡</span>
             <span style={{ color: accent }}>created by 推しプロフメーカー</span>
           </footer>
