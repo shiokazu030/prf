@@ -68,16 +68,16 @@ function NoteBox({
   lines?: number;
 }) {
   const hasValue = Boolean(value?.trim());
-  const lineHeight = 30;
-  const contentHeight = lines * lineHeight + 18;
+  const lineHeight = 26;
+  const contentHeight = lines * lineHeight + 12;
 
   return (
-    <div className={`rounded-[22px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-3 ${className}`}>
-      <div className="mb-2 inline-flex rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[20px] font-black text-[#d94d86]">
+    <div className={`rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-2.5 ${className}`}>
+      <div className="mb-1.5 inline-flex rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[19px] font-black text-[#d94d86]">
         {label}
       </div>
       <div
-        className={`preview-safe-text overflow-hidden whitespace-pre-wrap rounded-[16px] bg-[linear-gradient(#fff_0,#fff_30px,#ffe1ec_31px)] px-4 py-2 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text overflow-hidden whitespace-pre-wrap rounded-[15px] bg-[linear-gradient(#fff_0,#fff_26px,#ffe1ec_27px)] px-4 py-1.5 font-bold text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
         style={{
           display: "-webkit-box",
           fontSize: noteFontSize(value),
@@ -137,7 +137,7 @@ export const ProfilePreview = forwardRef<
   return (
     <div
       ref={ref}
-      className="relative h-[900px] w-[1600px] overflow-hidden p-[42px]"
+      className="relative h-[900px] w-[1600px] overflow-hidden p-[34px]"
       style={{
         background,
         color: template.textColor
@@ -145,21 +145,21 @@ export const ProfilePreview = forwardRef<
     >
       <Decoration />
 
-      <div className="relative h-full rounded-[48px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
-        <div className="flex h-full flex-col rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] pb-[18px] pt-[22px]">
-          <header className="mb-4 shrink-0 text-center">
+      <div className="relative h-full rounded-[46px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
+        <div className="flex h-full flex-col rounded-[34px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] pb-[24px] pt-[18px]">
+          <header className="mb-3 shrink-0 text-center">
             <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full bg-[#ffe3ed] px-7 py-2 text-[20px] font-black text-[#d94d86]">
               <span>✦</span>
               Profile Book
               <span>✦</span>
             </div>
-            <h1 className="text-[44px] font-black leading-none tracking-normal text-[#4b3342]">
+            <h1 className="text-[40px] font-black leading-none tracking-normal text-[#4b3342]">
               推しプロフィール帳
             </h1>
           </header>
 
-          <div className="grid flex-1 grid-cols-[1fr_1.05fr] gap-4">
-            <div className="grid content-start gap-4">
+          <div className="grid flex-1 grid-cols-[1fr_1.05fr] gap-4 overflow-hidden">
+            <div className="grid content-start gap-3.5">
               <section className="grid grid-cols-2 gap-4">
                 <LineField label="名前" value={profile.name} />
                 <LineField label="推し" value={profile.oshiMember} />
@@ -182,14 +182,14 @@ export const ProfilePreview = forwardRef<
               </section>
             </div>
 
-            <div className="grid content-start gap-4">
-              <NoteBox label="参戦予定" value={profile.nextPlans} lines={3} />
-              <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={4} />
-              <NoteBox label="ひとこと" value={profile.freeMessage} lines={3} />
+            <div className="grid content-start gap-3.5">
+              <NoteBox label="参戦予定" value={profile.nextPlans} lines={2} />
+              <NoteBox label="推しへの想い" value={profile.messageToOshi} lines={3} />
+              <NoteBox label="ひとこと" value={profile.freeMessage} lines={2} />
             </div>
           </div>
 
-          <footer className="mt-auto flex shrink-0 items-center justify-between pt-3 text-[17px] font-black text-[#d982a5]">
+          <footer className="mt-auto flex shrink-0 items-center justify-between pt-2 text-[17px] font-black text-[#d982a5]">
             <span>♡ 仲良くしてください ♡</span>
             <span style={{ color: accent }}>created by 推しプロフメーカー</span>
           </footer>
