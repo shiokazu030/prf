@@ -10,6 +10,20 @@ function valueOrBlank(value?: string) {
   return value?.trim() ? value : blank;
 }
 
+function singleLineFontSize(value?: string) {
+  const length = value?.trim().length ?? 0;
+  if (length > 22) return 23;
+  if (length > 14) return 26;
+  return 30;
+}
+
+function noteFontSize(value?: string) {
+  const length = value?.trim().length ?? 0;
+  if (length > 80) return 20;
+  if (length > 45) return 22;
+  return 24;
+}
+
 function LineField({
   label,
   value,
@@ -22,12 +36,20 @@ function LineField({
   const hasValue = Boolean(value?.trim());
 
   return (
-    <div className={`min-h-[98px] rounded-[22px] border-[3px] border-[#f4b8cf] bg-white/[0.82] px-6 py-4 ${className}`}>
-      <div className="mb-2 flex items-center gap-2 text-[24px] font-black text-[#e85f94]">
-        <span className="text-[20px]">♡</span>
+    <div className={`min-h-[82px] rounded-[20px] border-[3px] border-[#f4b8cf] bg-white/[0.82] px-5 py-3 ${className}`}>
+      <div className="mb-1 flex items-center gap-2 text-[20px] font-black text-[#e85f94]">
+        <span className="text-[17px]">♡</span>
         {label}
       </div>
-      <div className={`preview-safe-text border-b-[4px] border-dotted border-[#f0a9c5] pb-1 text-[34px] font-black leading-tight text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}>
+      <div
+        className={`preview-safe-text overflow-hidden border-b-[4px] border-dotted border-[#f0a9c5] pb-1 font-black leading-tight text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        style={{
+          display: "-webkit-box",
+          fontSize: singleLineFontSize(value),
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 2
+        }}
+      >
         {valueOrBlank(value)}
       </div>
     </div>
@@ -46,12 +68,18 @@ function NoteBox({
   const hasValue = Boolean(value?.trim());
 
   return (
-    <div className={`rounded-[24px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-6 py-5 ${className}`}>
-      <div className="mb-3 inline-flex rounded-full bg-[#ffe3ed] px-5 py-2 text-[24px] font-black text-[#d94d86]">
+    <div className={`rounded-[22px] border-[3px] border-[#f4b8cf] bg-white/[0.86] px-5 py-4 ${className}`}>
+      <div className="mb-2 inline-flex rounded-full bg-[#ffe3ed] px-4 py-1.5 text-[20px] font-black text-[#d94d86]">
         {label}
       </div>
       <div
-        className={`preview-safe-text min-h-[116px] whitespace-pre-wrap rounded-[18px] bg-[linear-gradient(#fff_0,#fff_42px,#ffe1ec_43px)] px-4 py-3 text-[30px] font-bold leading-[43px] text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        className={`preview-safe-text min-h-[90px] overflow-hidden whitespace-pre-wrap rounded-[16px] bg-[linear-gradient(#fff_0,#fff_32px,#ffe1ec_33px)] px-4 py-2 font-bold leading-[32px] text-[#56384a] ${hasValue ? "" : "text-[#caa7b8]"}`}
+        style={{
+          display: "-webkit-box",
+          fontSize: noteFontSize(value),
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 4
+        }}
       >
         {valueOrBlank(value)}
       </div>
@@ -103,7 +131,7 @@ export const ProfilePreview = forwardRef<
   return (
     <div
       ref={ref}
-      className="relative h-[1200px] w-[1200px] overflow-hidden p-[58px]"
+      className="relative h-[1200px] w-[1200px] overflow-hidden p-[44px]"
       style={{
         background,
         color: template.textColor
@@ -111,50 +139,50 @@ export const ProfilePreview = forwardRef<
     >
       <Decoration />
 
-      <div className="relative h-full rounded-[54px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[22px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
-        <div className="h-full rounded-[40px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[42px] py-[36px]">
-          <header className="mb-7 text-center">
-            <div className="mx-auto mb-3 flex w-fit items-center gap-4 rounded-full bg-[#ffe3ed] px-9 py-3 text-[25px] font-black text-[#d94d86]">
+      <div className="relative h-full rounded-[48px] border-[8px] border-[#ffc1d7] bg-white/[0.82] p-[18px] shadow-[0_28px_70px_rgba(180,80,120,0.18)]">
+        <div className="h-full rounded-[36px] border-[4px] border-dashed border-[#f7a9c8] bg-[#fffafd] px-[34px] py-[26px]">
+          <header className="mb-5 text-center">
+            <div className="mx-auto mb-2 flex w-fit items-center gap-3 rounded-full bg-[#ffe3ed] px-7 py-2 text-[21px] font-black text-[#d94d86]">
               <span>✦</span>
               Profile Book
               <span>✦</span>
             </div>
-            <h1 className="text-[58px] font-black leading-none tracking-normal text-[#4b3342]">
+            <h1 className="text-[48px] font-black leading-none tracking-normal text-[#4b3342]">
               推しプロフィール帳
             </h1>
           </header>
 
-          <section className="grid grid-cols-2 gap-5">
+          <section className="grid grid-cols-2 gap-4">
             <LineField label="名前" value={profile.name} />
             <LineField label="推し" value={profile.oshiMember} />
           </section>
 
-          <section className="mt-5 grid grid-cols-3 gap-5">
+          <section className="mt-4 grid grid-cols-3 gap-4">
             <LineField label="誕生日" value={profile.birthday} />
             <LineField label="血液型" value={profile.bloodType} />
             <LineField label="住み" value={profile.location} />
           </section>
 
-          <section className="mt-5 grid grid-cols-2 gap-5">
+          <section className="mt-4 grid grid-cols-2 gap-4">
             <LineField label="X ID" value={profile.xId} />
             <LineField label="同担" value={profile.sameFan} />
           </section>
 
-          <section className="mt-5 grid grid-cols-2 gap-5">
+          <section className="mt-4 grid grid-cols-2 gap-4">
             <LineField label="好きな曲" value={profile.favoriteSong} />
             <LineField label="推し始めた時期" value={profile.startedAt} />
           </section>
 
-          <section className="mt-5">
+          <section className="mt-4">
             <NoteBox label="参戦予定" value={profile.nextPlans} />
           </section>
 
-          <section className="mt-5 grid grid-cols-2 gap-5">
+          <section className="mt-4 grid grid-cols-2 gap-4">
             <NoteBox label="推しへの想い" value={profile.messageToOshi} />
             <NoteBox label="ひとこと" value={profile.freeMessage} />
           </section>
 
-          <footer className="mt-5 flex items-center justify-between text-[22px] font-black text-[#d982a5]">
+          <footer className="mt-4 flex items-center justify-between text-[18px] font-black text-[#d982a5]">
             <span>♡ 仲良くしてください ♡</span>
             <span style={{ color: accent }}>created by 推しプロフメーカー</span>
           </footer>

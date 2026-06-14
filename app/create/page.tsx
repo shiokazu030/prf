@@ -99,7 +99,7 @@ export default function CreatePage() {
     try {
       const dataUrl = await toPng(previewRef.current, {
         cacheBust: true,
-        pixelRatio: 1,
+        pixelRatio: 2,
         width: 1200,
         height: 1200,
         style: {
